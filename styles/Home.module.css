@@ -1,0 +1,139 @@
+/* backgruond image style starts here */
+.body{
+    
+     margin: 0px;
+    padding: 0px;
+    
+   
+    margin-top: -5rem;
+    min-height: 600px;
+    background: url('../public/bg.jpeg');
+    background-repeat: no-repeat;
+    background-size: 100% 630px;
+    animation: 
+    bgslider 20s infinite linear;
+  }  
+  @keyframes bgslider{
+    0%{
+        background-image: url('../public/bg.jpeg');
+    }
+    30%{
+        background-image: url('../public/bg.jpeg');
+    }
+    33%{
+        background-image: url('../public/coll2.jpg');
+    }
+    65%{
+        background-image: url('../public/coll2.jpg');
+    }
+    68%{
+        background-image: url('../public/coll3.jpeg');
+    }
+    97%{
+        background-image: url('../public/coll3.jpeg');
+    }
+    
+  }
+
+  
+/* notification bar starts here */
+.notifibar{
+    overflow: hidden;
+    height: 25px;
+    position: relative;
+    background-color: #f5e6a5 ;
+    background: linear-gradient(#f5e6a5, #d8b040);
+    /* z-index: 1; */
+    
+    }
+    .notifibox li{
+    list-style: none;
+    padding-top: 4px;
+    padding-bottom: 3px;
+    text-overflow: clip;
+    }
+    .notifibox li a{
+    white-space: nowrap;
+    overflow: hidden;
+    
+    text-align: initial;
+    text-overflow: clip;
+    }
+    .notifibox li{
+    position: relative;
+    animation-name: notification;
+    animation-duration: 12s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    }
+    @keyframes notification{
+    from{
+    margin-right: -5%;
+    }
+    to{
+    margin-left: 100%;
+    }
+    }
+    
+    .boxcontainer{
+      display: flex;
+      flex-wrap: wrap;
+      gap:2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    
+    .boxcontainer .box{
+      flex:1 1 30rem;
+      border-radius: .5rem;
+      overflow: hidden;
+      max-width: 25rem;
+      box-shadow: 0 1rem 2rem rgba(0,0,0,.1);
+      margin: auto;
+    }
+    
+    .boxcontainer .box .img{
+      
+      object-fit: cover;
+    }
+    
+    .boxcontainer .box .content{
+      padding:1rem 2rem;
+    }
+    
+    .boxcontainer .box .content .h3{
+      font-size:3rem;
+      color:#333;
+      margin: 0;
+    }
+    
+    .boxcontainer .box .content .p{
+      font-size:1.7rem;
+      color:#666;
+      padding:1rem 0;
+      margin: 0;
+    }
+    .boxcontainer .box:hover{
+      box-shadow: 0 0  2rem  rgba(0,0,0,.5);
+    }
+    
+      .endpart{
+      margin-top: -16px;
+      height: 10rem;
+      background-color:#302d2d;
+      text-align: center;
+      }
+      #endtext{
+      color: rgb(126, 124, 122);
+      }
+     
+
+      @media screen and (max-width :450px) {
+        .body{
+          background-size: 100% 455px;
+          min-height:455px;
+        }
+        
+        
+    }
