@@ -58,19 +58,19 @@ export default function Navbar() {
                <Link href="/"><a>Home</a></Link>
               </li>
               <li>
-                <a href="aboutus">About </a>
+                <Link href="aboutus"><a>About </a></Link>
               </li>
               <li>
-                <a href="example.html">Contuct us</a>
+                <Link><a >Contuct us</a></Link>
               </li>
               <li>
-                <a href="membership"> Membership request</a>
+                <Link href="membership"><a> Membership request</a></Link>
               </li>
               <li>
-                <a href="../upcomingEvents/">Upcoming events</a>
+                <Link><a>Upcoming events</a></Link>
               </li>
               <li>
-                <a href="example.html">Querry</a>
+                <Link><a>Querry</a></Link>
               </li>
             </ul>
           </div>
