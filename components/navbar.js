@@ -35,7 +35,7 @@ export default function Navbar() {
             <div className={styles.clearfixed}></div>
             <div className={styles.formaly}>
               <h5>
-                <strong>FORMERLY:PURULIA GOVERNMENT ENGINEERING COLLEGE</strong>
+                <strong>FORMERLY:PURULIA&ensp;GOVERNMENT ENGINEERING COLLEGE</strong>
               </h5>
             </div>
           </div>
@@ -61,16 +61,16 @@ export default function Navbar() {
                 <Link href="aboutus"><a>About </a></Link>
               </li>
               <li>
-                <Link><a >Contuct us</a></Link>
+                <Link href="/"><a >Contuct us</a></Link>
               </li>
               <li>
                 <Link href="membership"><a> Membership request</a></Link>
               </li>
               <li>
-                <Link><a>Upcoming events</a></Link>
+                <Link href="/"><a>Upcoming events</a></Link>
               </li>
               <li>
-                <Link><a>Querry</a></Link>
+                <Link href="/"><a>Querry</a></Link>
               </li>
             </ul>
           </div>
