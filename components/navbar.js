@@ -35,7 +35,7 @@ export default function Navbar() {
             <div className={styles.clearfixed}></div>
             <div className={styles.formaly}>
               <h5>
-                <strong>FORMERLY:PURULIA&ensp;GOVERNMENT ENGINEERING COLLEGE</strong>
+                <strong>FORMERLY:PURULIA GOVERNMENT ENGINEERING COLLEGE</strong>
               </h5>
             </div>
           </div>
