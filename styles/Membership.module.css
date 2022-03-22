@@ -27,7 +27,7 @@
   font-size: 23px;
 }
 
-.un {
+.input {
   width: 76%;
   color: rgb(38, 50, 56);
   font-weight: 700;
@@ -117,3 +117,46 @@ form.form1 {
         height: 70vh;
     }
 }
+
+
+
+.container {
+	max-width: 800px;
+	margin: 20px auto;
+	padding: 10px;
+  }
+  
+  .form {
+	width: 100%;
+  }
+  
+  .formItem {
+	display: block;
+	width: 100%;
+	margin: 10px auto;
+  }
+  
+  .formItem label {
+	display: block;
+  }
+  
+  .formItem input[type='text'] {
+	display: block;
+	width: 100%;
+	padding: 10px;
+  }
+  
+  .formItem textarea {
+	display: block;
+	width: 100%;
+	padding: 10px;
+  }
+  
+  .error {
+	color: red;
+  }
+  
+  .message {
+	color: green;
+  }
+

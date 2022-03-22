@@ -13,11 +13,13 @@ function Availablebooks({books}) {
 <ul>
         {books.map((book,i) => (
           <li key={i}>
-            <h2>{book.book}</h2>
-            <h4>{book.name}</h4>
-            <p>{book.contact}</p>
+            <h2>Book Name : {book.book}</h2>
+            <h4>Name : {book.name}</h4>
+            <p>Contact No : {book.contact}</p>
+            <hr />
           </li>
         ))}
+        
       </ul>
 </div>
 

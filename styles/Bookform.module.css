@@ -170,15 +170,6 @@
   }
 
 
-
-
-
-
-
-
-
-
-
 /* available books css */
 
 
@@ -193,6 +184,9 @@
 	overflow-y: scroll; 
 }
 
-
+.availablebtn{
+	right: 0;
+	width: 15rem;
+}
 
 

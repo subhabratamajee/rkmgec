@@ -75,8 +75,9 @@
   .navbar li{
   float: left;
   list-style: none;
+  padding-right: 1rem;
   }
-  .navbar li a{
+  .navbar li Link{
   padding-right: 1rem;
   }
   .menubar{

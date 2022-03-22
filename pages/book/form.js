@@ -2,38 +2,37 @@ import Head from "next/head";
 import React, { useState } from "react";
 import { useEffect } from "react";
 // import post from '../api/book'
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 // import Image from "next/image";
 import styles from "../../styles/Bookform.module.css";
 
 function Form() {
-	const router = useRouter()
-	// const contentType = 'application/json'
+  const router = useRouter();
+  // const contentType = 'application/json'
 
-  const [name, setName] = useState('')
-  const [roll, setRoll] = useState('')
-const[email,setEmail]=useState('')
-const[contact,setContact]=useState('')
-const[year,setYear]=useState('')
-const[book,setBook]=useState('')
+  const [name, setName] = useState("");
+  const [roll, setRoll] = useState("");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
+  const [year, setYear] = useState("");
+  const [book, setBook] = useState("");
+  const [error, setError] = useState();
+  const [message, setMessage] = useState("");
 
-	const [error, setError] = useState()
-	const [message, setMessage] = useState('')
-  
   const handlePost = async (e) => {
     e.preventDefault();
 
     // reset error and message
-    setError('');
-    setMessage('');
+    setError("");
+    setMessage("");
 
     // fields check
-    if (!name || !roll || !email|| !contact|| !year || !book) return setError('All fields are required');
-   
-    // if (formValidate) return setError({errs});
-    
+    if (!name || !roll || !email || !contact || !year || !book)
+      return setError("All fields are required");
 
-    let bookreq={
+    // if (formValidate) return setError({errs});
+
+    let bookreq = {
       name,
       roll,
       email,
@@ -42,66 +41,38 @@ const[book,setBook]=useState('')
       book,
       createdAt: new Date().toISOString(),
     };
-    let response = await fetch('../api/book', {
-      method: 'POST',
+    let response = await fetch("../api/book", {
+      method: "POST",
       // headers: {
       //   Accept: contentType,
       //   'Content-Type': contentType,
       // },
       body: JSON.stringify(bookreq),
-  });
+    });
 
-  let data = await response.json();
+    let data = await response.json();
 
-  if (data.success) {
-    // reset the fields
-    setName('');
-    setRoll('');
-    setEmail('');
-    setContact('');
-    setYear('');
-    setBook('');
- 
+    if (data.success) {
+      // reset the fields
+      setName("");
+      setRoll("");
+      setEmail("");
+      setContact("");
+      setYear("");
+      setBook("");
+
       setMessage(data.message);
 
-    
       setTimeout(() => {
-        router.push('./availablebooks')
-      }, 100)
-    
-  
-    
-   
-} else {
-    // set the error
-    return setError(data.message);
-}
-};
+        router.push("./availablebooks");
+      }, 100);
+    } else {
+      // set the error
+      return setError(data.message);
+    }
+  };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-  
-
-
-
-
-    //   setErrors({ errs });
-   
- 
+  //   setErrors({ errs });
 
   // const formValidate = () => {
   //   let err = {}
@@ -109,20 +80,19 @@ const[book,setBook]=useState('')
   //   if (!roll) err.roll = 'Roll No is required'
   //   if (!email) err.email = 'Email is required'
   //   if (!contact) err.contact = 'Contact is required'
-	// if (!year) err.year = 'Year is required'
-	// if (!book) err.book = 'Book Name is required'
+  // if (!year) err.year = 'Year is required'
+  // if (!book) err.book = 'Book Name is required'
   //   return err
   // }
   // const errs = formValidate()
   // if (Object.keys(errs).length !=0) {
-    
+
   //   setError({ errs })
   // }
-  
+
   // {Object.keys(error).map((err, index) => (
   //   <li key={index}>{err}</li>
   //         ))}
-
 
   return (
     <>
@@ -131,22 +101,22 @@ const[book,setBook]=useState('')
         <title>Required Book Form</title>
       </Head>
       <div className={styles.container}>
-      <div><a href="./availablebooks">abailable books</a></div>
+        <div>
+          <button className={styles.availablebtn}><a href="./availablebooks">abailable books</a></button>
+        </div>
         <div className={styles.contactForm}>
           <h2>Book Submittng</h2>
           <form onSubmit={handlePost} className={styles.form}>
- 
-          {error ? (
-                        <div className={styles.formItem}>
-                            <h3 className={styles.error}> {error}</h3>
-                        </div>
-                    ) : null}
-                    {message ? (
-                        <div className={styles.formItem}>
-                            <h3 className={styles.message}>{message}</h3>
-                        </div>
-                    ) : null}
-
+            {error ? (
+              <div className={styles.formItem}>
+                <h3 className={styles.error}> {error}</h3>
+              </div>
+            ) : null}
+            {message ? (
+              <div className={styles.formItem}>
+                <h3 className={styles.message}>{message}</h3>
+              </div>
+            ) : null}
             Name
             <input
               type="text"
@@ -184,10 +154,11 @@ const[book,setBook]=useState('')
               type="text"
               name="year"
               list="yearlist"
-              placeholder="Select Year.." value={year}
+              placeholder="Select Year.."
+              value={year}
               onChange={(e) => setYear(e.target.value)}
             />
-            <datalist id="yearlist"   >
+            <datalist id="yearlist">
               <option value="1st year" />
               <option value="2nd year" />
               <option value="3rd year" />
@@ -204,7 +175,7 @@ const[book,setBook]=useState('')
               onChange={(e) => setBook(e.target.value)}
             />
             <br />
-           <button type="submit">Request Book</button>
+            <button type="submit">Request Book</button>
             <br />
           </form>
         </div>
