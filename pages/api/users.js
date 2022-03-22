@@ -38,7 +38,7 @@ function createUser(db, email,roll, password, callback) {
   });
 }
 
-export default (req, res) => {
+export default function (req, res) {
   if (req.method === 'POST') {
     // signup
     try {

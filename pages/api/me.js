@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'SUPERSECRETE20220';
 
-export default (req, res) => {
+export default function(req, res) {
   if (req.method === 'GET') {
     if (!('token' in req.cookies)) {
       res.status(401).json({message: 'Unable to auth'});

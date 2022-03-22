@@ -20,7 +20,7 @@ export default function Navbar() {
           <div className={styles.logobox}>
             <a href="https://rkmgec.ac.in">
               <Image
-                src="/embb-min.png"
+                src="/embb-min.png" alt='logo'
                 className={styles.ashokstamv}
                 height={50}
                 width={40}

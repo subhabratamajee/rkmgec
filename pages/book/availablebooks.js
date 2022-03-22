@@ -7,7 +7,7 @@ function Availablebooks({books}) {
     <div className={styles.body}>
         <h1 align="center"> RAMKRISHNA MAHATO GOVERNMENT ENGINEERING COLLEGE</h1>
         <h2 align="center">WELCOME TO OUR LIBRARY!</h2>
-        <h3 align="center">"A BOOK IS A DREAM THAT YOU HOLD IN YOUR HAND"</h3>
+        <h3 align="center">A BOOK IS A DREAM THAT YOU HOLD IN YOUR HAND</h3>
 
 <div>
 <ul>

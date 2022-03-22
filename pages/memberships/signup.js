@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Router from "next/router";
 import cookie from "js-cookie";
 
-const Signup = () => {
+const Signup =()=> {
   const [signupError, setSignupError] = useState("");
   const [email, setEmail] = useState("");
   const [roll, setRoll] = useState("");
