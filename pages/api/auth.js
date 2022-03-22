@@ -23,7 +23,7 @@ function authUser(db, roll, password, hash, callback) {
   bcrypt.compare(password, hash, callback);
 }
 
-export default function(req, res)  {
+export default function auth(req, res)  {
   if (req.method === 'POST') {
     //login
     try {
