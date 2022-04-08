@@ -177,10 +177,13 @@
 	margin-top: -2rem;
 	padding-top: 3.5rem;
     background-image: url("../public/bookbg.jpeg");
+	/* position:fixed; */
     background-repeat: no-repeat;
     background-size: 100% 100%;
 	min-width: 100vw;
-	min-height: 80vh;
+	height: 90vh;
+	/* min-height: 80vh; */
+	/* overflow: hidden; */
 	overflow-y: scroll; 
 }
 

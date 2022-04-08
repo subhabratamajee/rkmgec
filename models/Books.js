@@ -2,41 +2,32 @@ import mongoose from 'mongoose'
 
 
 const BookSchema = new mongoose.Schema({
-  name: {
-  
-
+  userId: {
     type: String,
-    required: [true, 'Please Enter your name.'],
+    required: [true, 'Please Enter your Userid.'],
     maxlength: [30, 'Name cannot be more than 60 characters'],
   },
-  roll: {
-   
-
+  book_title: {
     type: String,
-    required: [true, "Please provide the roll no"],
-    maxlength: [20, "Roll No cannot be more than 60 characters"],
+    required: [true, "Please provide the  Book Title"],
+    maxlength: [20, "Book Title cannot be more than 60 characters"],
   },
-  email: {
-  
+  author: {
     type: String,
-    required: [true, 'Please put email id'],
-    maxlength: [30, 'email cannot be more than 40 characters'],
+    required: [true, "Please provide the author name"],
+    maxlength: [20, "Author cannot be more than 60 characters"],
   },
   contact: {
       type: Number,
     maxlength:[10,'Contact number must be 10 Digit'],
 
   },
-  year: {
-   
-    type: String,
-  },
-  book: {
-   
-
-    type: String,
-  },
+isShow: {
+  type: Boolean,
+  default: false,
+},
  
-})
+},
+{timestamps:true})
 
 export default mongoose.models.Book || mongoose.model('Book', BookSchema)

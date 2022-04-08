@@ -1,32 +1,47 @@
+// import React from 'react'
 import React, { useState,useEffect } from "react";
 // import d from '../../public/bookbg'
 import styles from "../../styles/Bookform.module.css";
+import useSWR from "swr";
 import dbConnect from "../../lib/mongodb";
 import Books from "../../models/Books";
 import axios from "axios";
-// import User from "../../models/User";
-function Availablebooks({ books }) {
-  const [search, setSearch] = useState("");
-  const [user, setUser] = useState({});
-  const [userid, setUserid] = useState('')
-  useEffect(() => {
-   const fetchUser = async ()=>{
-     const res =await axios.get(`user/${userid}`)
-     setUser(res.data)
-   }
-  })
-  
+
+
+export default function BookUpdate({books}) {
+    const [search, setSearch] = useState("");
+    const [user, setUser] = useState({});
+    
+    const [userid, setUserid] = useState('')
+    useEffect(() => {
+     const fetchUser = async ()=>{
+       const res =await axios.get(`user/${userid}`)
+       setUser(res.data)
+     }
+    })
+
+    const { data } = useSWR("/api/me", async function (args) {
+        const res = await fetch(args);
+        return res.json();
+      });
+      console.log(data);
+      if (!data) return <h1>Loading...</h1>;
+      let loggedIn = false;
+      if (data.admin == true) {
+        loggedIn = true;
+      }
   return (
+
+// import User from "../../models/User";
+
+ 
+  
+  
     <div>
-      console.log(user)
-      console.log(userid)
+    {loggedIn &&(
       <div className={styles.body}>
-        <h1 align="center">
-          {" "}
-          RAMKRISHNA MAHATO GOVERNMENT ENGINEERING COLLEGE
-        </h1>
-        <h2 align="center">WELCOME TO OUR LIBRARY!</h2>
-        <h3 align="center">A BOOK IS A DREAM THAT YOU HOLD IN YOUR HAND</h3>
+      
+     
 
         <div>
           <input className="input"
@@ -62,7 +77,7 @@ function Availablebooks({ books }) {
               .map((book) => {
                 return (
                   
-                  book.isShow === true && (<>
+                  book.isShow === false && (<>
                     <li key={book._id}>
                     setUserid({book.userId});
                       <div>
@@ -79,6 +94,12 @@ function Availablebooks({ books }) {
           </ul>
         </div>
       </div>
+      )}
+        {!loggedIn && (
+        <>
+          <h1>Sorry You're not an Admin !!!</h1>
+        </>
+      )}
       <style jsx>{`
         h1 {
           color: blue;
@@ -113,24 +134,27 @@ function Availablebooks({ books }) {
     </div>
   );
 }
-export default Availablebooks;
+
+
+
+
 
 export async function getServerSideProps(params) {
-  const { db } = await dbConnect();
-  const books = await Books.find({}).lean();
-  // const user = await User.findById(params.userId).lean();
-  // pet._id = pet._id.toString()
-  // const books = await db
-  //   .collection("books")
-  //   .find({})
-  //   .sort({ metacritic: -1 })
-  //   .limit(20)
-  //   .toArray();
-
-  return {
-    props: {
-      books: JSON.parse(JSON.stringify(books)),
-      // user: JSON.parse(JSON.stringify(user)),
-    },
-  };
-}
+    const { db } = await dbConnect();
+    const books = await Books.find({}).lean();
+    // const user = await User.findById(params.userId).lean();
+    // pet._id = pet._id.toString()
+    // const books = await db
+    //   .collection("books")
+    //   .find({})
+    //   .sort({ metacritic: -1 })
+    //   .limit(20)
+    //   .toArray();
+  
+    return {
+      props: {
+        books: JSON.parse(JSON.stringify(books)),
+        // user: JSON.parse(JSON.stringify(user)),
+      },
+    };
+  }

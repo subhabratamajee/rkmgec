@@ -1,15 +1,17 @@
 import Head from 'next/head';
 import fetch from 'isomorphic-unfetch';
 import useSWR from 'swr';
-import Router from 'next/router';
+import {useRouter} from 'next/router';
 import Link from 'next/link';
 import cookie from 'js-cookie';
 
 function Home() {
-  const {data, revalidate} = useSWR('/api/me', async function(args) {
+  const router=useRouter()
+  const {data} = useSWR('/api/me', async function(args) {
     const res = await fetch(args);
     return res.json();
   });
+  console.log(data)
   if (!data) return <h1>Loading...</h1>;
   let loggedIn = false;
   if (data.email) {
@@ -27,12 +29,12 @@ function Home() {
       <h2>welcome to rkmgec</h2>
       {loggedIn && (
         <>
-          <p>Welcome {data.email}!</p>
+          <p>Welcome {data.name}!</p>
           <button className='button'
             onClick={() => {
               cookie.remove('token');
               // revalidate();
-              Router.push('/memberships/login');
+              router.push('/memberships/login');
             }}>
             Logout
           </button>

@@ -3,72 +3,80 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 // import post from '../api/book'
 import { useRouter } from "next/router";
+import useSWR from 'swr';
 // import Image from "next/image";
+import { server } from '../../next.config';
 import styles from "../../styles/Bookform.module.css";
 
-function Form() {
+function Form(props) {
   const router = useRouter();
-  // const contentType = 'application/json'
-
-  const [name, setName] = useState("");
-  const [roll, setRoll] = useState("");
-  const [email, setEmail] = useState("");
+  const [book_title, setBook_title] = useState("");
+  const [author, setAuthor] = useState("");
   const [contact, setContact] = useState("");
-  const [year, setYear] = useState("");
-  const [book, setBook] = useState("");
   const [error, setError] = useState();
   const [message, setMessage] = useState("");
 
+  
+    
+//   const data =  fetch('../api/me');
+//   // return res.json();
+//  const dt =  data.json();
+//  console.log(dt);
+  // if (!data) return <h1>Loading...</h1>;
+  // let loggedIn = false;
+  // if (data.email) {
+  //   loggedIn = true;
+  // }
+// console.log(loggedIn)
   const handlePost = async (e) => {
     e.preventDefault();
-
+    const data = await fetch('../api/me');
+    // return res.json();
+   const dt = await data.json();
+   console.log(dt);
+    const contentType = 'application/json'
+  // console.log(data.email)
     // reset error and message
     setError("");
     setMessage("");
 
     // fields check
-    if (!name || !roll || !email || !contact || !year || !book)
-      return setError("All fields are required");
+    // if (!book_title || !author || !contact)
+    //   return setError("All fields are required");
 
     // if (formValidate) return setError({errs});
 
     let bookreq = {
-      name,
-      roll,
-      email,
+      userId:dt.userId,
+      book_title,
+      author,
       contact,
-      year,
-      book,
-      createdAt: new Date().toISOString(),
     };
     let response = await fetch("../api/book", {
       method: "POST",
-      // headers: {
-      //   Accept: contentType,
-      //   'Content-Type': contentType,
-      // },
+      headers: {
+        Accept: contentType,
+        'Content-Type': contentType,
+      },
       body: JSON.stringify(bookreq),
     });
 
-    let data = await response.json();
+    let dataa = await response.json();
 
-    if (data.success) {
+    if (dataa.success) {
       // reset the fields
-      setName("");
-      setRoll("");
-      setEmail("");
+      setBook_title("");
+      setAuthor("");
       setContact("");
-      setYear("");
-      setBook("");
 
-      setMessage(data.message);
+      setMessage(dataa.message);
 
       setTimeout(() => {
         router.push("./availablebooks");
       }, 100);
     } else {
       // set the error
-      return setError(data.message);
+      return setError(dataa.message);
     }
   };
 
@@ -98,13 +106,14 @@ function Form() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Required Book Form</title>
+        <title>Required Book's Form</title>
       </Head>
-      <div className={styles.container}>
+      <div >
         <div>
-          <button className={styles.availablebtn}><a href="./availablebooks">abailable books</a></button>
+          <button className="button available"><a href="./availablebooks">Requesting  Books</a></button>
         </div>
-        <div className={styles.contactForm}>
+        {/* {!dt ? ( */}
+        <div className="main">
           <h2>Book Submittng</h2>
           <form onSubmit={handlePost} className={styles.form}>
             {error ? (
@@ -117,71 +126,61 @@ function Form() {
                 <h3 className={styles.message}>{message}</h3>
               </div>
             ) : null}
-            Name
-            <input
+            <input className="input" placeholder="Book Title"
               type="text"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              required={true}
+              name="book_title"
+              value={book_title}
+              onChange={(e) => setBook_title(e.target.value)}
             />
             <br />
-            Roll_No
-            <input
+            <input className="input" placeholder="Author"
               type="text"
-              name="roll"
-              value={roll}
-              onChange={(e) => setRoll(e.target.value)}
+              required={true}
+              name="author"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
             />
             <br />
-            Email
-            <input
+           
+  
+            <input className="input"
+            placeholder="Contact Number"
               type="text"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <br />
-            Contact_No
-            <input
-              type="text"
+              required={true}
               name="contact"
               value={contact}
               onChange={(e) => setContact(e.target.value)}
             />
-            <br />
-            Year:
-            <input
-              type="text"
-              name="year"
-              list="yearlist"
-              placeholder="Select Year.."
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            />
-            <datalist id="yearlist">
-              <option value="1st year" />
-              <option value="2nd year" />
-              <option value="3rd year" />
-              <option value="4th year" />
-            </datalist>
-            <br />
-            Select:
-            <br />
-            Book Name
-            <input
-              type="text"
-              name="bookname"
-              value={book}
-              onChange={(e) => setBook(e.target.value)}
-            />
-            <br />
-            <button type="submit">Request Book</button>
+            <button className="button" type="submit">Request Book</button>
             <br />
           </form>
         </div>
-      </div>
+       {/* ) : (
+          <h1>please login to post</h1>
+             )    } */}
+          </div>
     </>
   );
 }
 
 export default Form;
+
+// export async function getServerSideProps() {
+//   const data = await fetch(`${server}/api/me`);
+//   // return res.json();
+//  const dt = await data.json();
+//   // if (!data) return <h1>Loading...</h1>;
+//   // let loggedIn = false;
+//   // if (data.email) {
+//   //   loggedIn = true;
+//   // }
+//   profile =dt.userId;
+//   return {
+//         props: {
+//           baseApiUrl,
+//           profile,
+//         },
+//       };
+// }
+
